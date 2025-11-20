@@ -1,0 +1,30 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: nginx-notes-twotier-ingress
+  namespace: nginx
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /nginx
+        backend:
+          service:
+            name: nginx-service
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: notes-app-service
+            port: 
+              number: 8000
+      - pathType: Prefix
+        path: /app2
+        backend:
+          service:
+            name: two-tier-service
+            port:
+              number: 5000
